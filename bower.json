@@ -1,0 +1,23 @@
+{
+  "name": "project_2",
+  "version": "1.0.0",
+  "authors": [
+    "Edward Dokenov <edward.dokenov@gmail.com>"
+  ],
+  "description": "testing project with grunt and bower",
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "modernizr": "~2.8.3"
+  }
+}
