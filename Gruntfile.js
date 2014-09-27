@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
-		clean: ["prod"],
+		clean: ['prod', '.sass-cache/'],
 		jade: {
 			compile: {
 				files: [{
@@ -28,14 +28,14 @@ module.exports = function(grunt) {
 		},
 		bower_concat: {
 			all: {
-				dest: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/_bower.js',
+				dest: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.js',
 				exclude: ['modernizr']
 			}
 		},
 		concat: {
 			main: {
 				src: [
-					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/_bower.js',
+					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.js',
 					'dev/js/*.js'
 				],
 				dest: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.js'
@@ -46,8 +46,8 @@ module.exports = function(grunt) {
 			main: {
 				files: {
 					// Результат задачи concat
-					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.min.js': '<%= concat.main.dest %>',
-					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/modernizr.min.js' : 'bower_components/modernizr/modernizr.js'
+					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.js': '<%= concat.main.dest %>',
+					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/modernizr.js' : 'bower_components/modernizr/modernizr.js'
 				}
 			}
 		},
