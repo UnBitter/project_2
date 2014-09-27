@@ -1,7 +1,7 @@
 # Исключаем папку prod
 prod/
 # Исключаем папку dev/.sass-cache/
-dev/.sass-cache/
+.sass-cache/
 #Игнорируем файлы проекта sublime
 *.sublime-project
 *.sublime-workspace

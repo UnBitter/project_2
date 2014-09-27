@@ -1,10 +1,12 @@
 module.exports = function(grunt) {
 	grunt.initConfig({
+		clean: ["prod"],
 		jade: {
 			compile: {
 				files: [{
-					src: ['dev/templates/*.jade', '!dev/templates/incl/*.jade'],
-					dest: 'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>',
+					src: ['**/*.jade', '!**/incl/*.jade'],
+					dest: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>/',
+					cwd: 'dev/templates',
 					expand: true,
 					ext: '.html'
 				}]
@@ -16,7 +18,7 @@ module.exports = function(grunt) {
 		sass: {
 			prod: {
 				files: {
-					'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>/css/main.css': 'dev/sass/main.scss'
+					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/css/main.css': 'dev/sass/main.scss'
 				},
 				options: {
 					compass: true,
@@ -26,17 +28,17 @@ module.exports = function(grunt) {
 		},
 		bower_concat: {
 			all: {
-				dest: 'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>/js/_bower.js',
+				dest: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/_bower.js',
 				exclude: ['modernizr']
 			}
 		},
 		concat: {
 			main: {
 				src: [
-					'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>/js/_bower.js',
+					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/_bower.js',
 					'dev/js/*.js'
 				],
-				dest: 'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.js'
+				dest: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.js'
 			}
 		},
 		// Сжимаем
@@ -44,52 +46,41 @@ module.exports = function(grunt) {
 			main: {
 				files: {
 					// Результат задачи concat
-					'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.min.js': '<%= concat.main.dest %>'
+					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/scripts.min.js': '<%= concat.main.dest %>',
+					'prod/build_<%= grunt.template.today("m-d-yyyy") %>/js/modernizr.min.js' : 'bower_components/modernizr/modernizr.js'
 				}
 			}
 		},
-
-		requirejs: {
-		      compile: {
-		        options: {
-		          mainConfigFile: "dev/js/main.js", // главный файл с описанием конфигурации и билда require.js
-		          baseUrl: "dev/js", // папка где находятся все js файлы
-		          name: 'main', // название файла запускающего приложение
-		          include: ['main'], // вставить в выходящий файл и main.js
-		          out: "prod/builds/prod_build_<%= grunt.template.today('m-d-yyyy') %>/js/main.min.js" // выходящий минифицированный и конкатенированный файл готовые для продакшена
-		        }
-		      }
-		    },
 
 		imagemin: {
 			dynamic: {
 				files: [{
 					expand: true,
 					src: ['dev/img/*.{png,jpg,gif}'],
-					dest: 'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>/img'
+					dest: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>/img'
 				}]
 			}
 		},
 		watch: {
-			livereload: {
+			all: {
 				options: {
 					livereload: true
 				},
-				files: ['prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>/*']
+				files: ['prod/build_<%= grunt.template.today("m-d-yyyy") %>/*']
 			},
-			js: {
+			javascript: {
 				files: ['dev/js/libs/jquery.js', 'dev/js/*.js'],
 				tasks: ['concat', 'uglify']
 			},
-			sass: {
+			scss: {
 				files: ['dev/sass/*.scss'],
 				tasks: 'sass'
 			},
-			jade: {
-				files: ['dev/templates/*.jade', '!templates/incl/*.jade'],
+			templates: {
+				files: ['dev/templates/*.jade', 'dev/templates/incl/*.jade'],
 				tasks: 'jade'
 			},
-			imagemin: {
+			images: {
 				files: ['dev/img/*.{png,jpg,gif}'],
 				tasks: 'imagemin'
 			}
@@ -98,12 +89,13 @@ module.exports = function(grunt) {
 			server: {
 				options: {
 					port: 3000,
-					base: 'prod/builds/prod_build_<%= grunt.template.today("m-d-yyyy") %>'
+					base: 'prod/build_<%= grunt.template.today("m-d-yyyy") %>'
 				}
 			}
 		},
 	});
 
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-bower-concat');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-connect');
@@ -112,9 +104,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	grunt.registerTask('default', [
+		'clean',
 		'connect',
 		'jade',
 		'sass',
@@ -122,7 +114,6 @@ module.exports = function(grunt) {
 		'concat',
 		'uglify',
 		'imagemin',
-		'requirejs',
 		'watch'
 	]);
 };
