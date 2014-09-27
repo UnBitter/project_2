@@ -48,6 +48,19 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+
+		requirejs: {
+		      compile: {
+		        options: {
+		          mainConfigFile: "dev/js/main.js", // главный файл с описанием конфигурации и билда require.js
+		          baseUrl: "dev/js", // папка где находятся все js файлы
+		          name: 'main', // название файла запускающего приложение
+		          include: ['main'], // вставить в выходящий файл и main.js
+		          out: "prod/builds/prod_build_<%= grunt.template.today('m-d-yyyy') %>/js/main.min.js" // выходящий минифицированный и конкатенированный файл готовые для продакшена
+		        }
+		      }
+		    },
+
 		imagemin: {
 			dynamic: {
 				files: [{
@@ -99,6 +112,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
 	grunt.registerTask('default', [
 		'connect',
@@ -108,6 +122,7 @@ module.exports = function(grunt) {
 		'concat',
 		'uglify',
 		'imagemin',
+		'requirejs',
 		'watch'
 	]);
 };
