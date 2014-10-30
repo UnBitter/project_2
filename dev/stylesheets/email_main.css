@@ -1,0 +1,14 @@
+.wrapper {
+  width: 76%;
+  margin-left: 7%;
+  overflow: hidden; }
+
+.column_2 {
+  float: left;
+  width: 45%; }
+
+p {
+  font-size: 24px;
+  color: #444444; }
+
+/*# sourceMappingURL=email_main.css.map */

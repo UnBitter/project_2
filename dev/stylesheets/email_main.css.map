@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,QAAS;EACR,KAAK,EAAE,GAAG;EACV,WAAW,EAAE,EAAE;EACf,QAAQ,EAAE,MAAM;;AAEjB,SAAU;EACT,KAAK,EAAE,IAAI;EACX,KAAK,EAAE,GAAG;;AAEX,CAAE;EACD,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,OAAO",
+"sources": ["email_main.scss"],
+"names": [],
+"file": "email_main.css"
+}

@@ -1,5 +1,13 @@
-doctype html
-html
+doctype
+//if lt IE 7
+	<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+//if IE 7
+	<html class="no-js lt-ie9 lt-ie8">
+//if IE 8
+	<html class="no-js lt-ie9">
+// [if gt IE 8]<!
+html(class="no-js", lang="en")
+	// <![endif]
 	include incl/_head.jade
 	include incl/_layout.jade
 	include incl/_footer.jade

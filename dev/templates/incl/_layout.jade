@@ -1,2 +1,54 @@
-body
-	p Hello, world! o cgane ti gangsta
+header.header
+	.container-fluid
+		.col-xs-4
+		.col-xs-4.logo-holder
+			img(src="img/logo.png", width="245", height="145")
+		.col-xs-4
+			.pull-right.call-block
+				p.number +7 (495) 123-45-67
+				p
+					a(href="#") Заказать звонок
+section.main.intro
+	.container-fluid
+		article
+			header
+				h1 Как провести выходные со вкусом?
+				h2 Компания&nbsp;"Пикник гедониста"&nbsp;с&nbsp;большим&nbsp;удовольствием подготовит&nbsp;ваше&nbsp;праздничное&nbsp;меню&nbsp;и&nbsp;окажет максимально&nbsp;качественный&nbsp;сервис&nbsp;в&nbsp;организации мероприятия&nbsp;для&nbsp;вас
+			p.under-text Весь сервис наша компания оказывает точно в срок. Процесс ведется через одного менеджера.
+			button(type="button", id="scrollBtn" class="btn btn-default")
+section.main.action
+	.container-fluid
+		article
+			header
+				h1(id="scrollElt") Оставьте заявку сейчас, чтобы получить скидку 15%
+				h2 До конца акции осталось
+			script(src="http://www.timegenerator.ru/s/c3d287f51789fa364ba1ee0ffa1eb26c.js")
+			.form-bg
+				.form-inner
+					form.form-horisontal
+						.row
+							.form-group.col-xs-6
+								label(for="inputName") Ваше имя *
+								input(type="text", id="inputName", class="form-control", placeholder="Введите ваше имя", required)
+							.form-group.col-xs-6
+								label(for="inputEmail") Ваш E-mail *
+								input(type="email", id="inputEmail", class="form-control", placeholder="vasya.pupkin@example.com", required)
+						.row
+							.form-group.col-xs-6
+								label(for="inputPhone") Ваш телефон *
+								input(type="tel", id="inputPhone", class="form-control", placeholder="+71234567894", required)
+							.form-group.col-xs-6
+								label(for="inputCities") Выберите город
+								input(type="text", id="inputCities", class="form-control", placeholder="Начните вводить название", name="cities", list="cities" required)
+								datalist(id="cities")
+									option(value="Москва")
+									option(value="Санкт-Петербург")
+									option(value="Екатеринбург")
+									option(value="Казань брал")
+									option(value="Астрахань брал")
+									option(value="Шпака... не брал")
+									option(value="Бишкек")
+						.form-group.form-group-align-center
+							button(type="submit", class="btn btn-default")
+						.form-group.form-group-align-center
+							a(href="#" class="link-form") Политика конфиденциальности
